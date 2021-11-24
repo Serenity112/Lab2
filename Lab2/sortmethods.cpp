@@ -11,23 +11,23 @@ void swap(int& a, int& b)
 }
 
 template <typename T>
-void PrintArray(T array[], int n)
+void PrintArray(T array[], int size)
 {
-    for (int i = 0; i < n; i++) 
+    for (int i = 0; i < size; i++) 
     {
         cout << array[i] << " ";
     }
     cout << endl;
 }
 
-int BinarySearch(int array[], int end, int x)
+int BinarySearch(int array[], int size, int x)
 {
     int middle = 0;
     int start = 0;
 
     while (true)
     {
-        middle = (start + end) / 2;
+        middle = (start + size) / 2;
 
         if (x == array[middle])
         {
@@ -36,14 +36,14 @@ int BinarySearch(int array[], int end, int x)
         else
         if (x < array[middle])
         {
-            end = middle - 1;
+            size = middle - 1;
         }
         else if (x > array[middle])
         {
             start = middle + 1;
         }
 
-        if (start > end)
+        if (start > size)
         {
             return -1;
         }
@@ -51,30 +51,10 @@ int BinarySearch(int array[], int end, int x)
     }
 }	
 
-int partition(int array[], int left, int right)
+void QuickSort(int array[], int left, int right)
 {
-    int pivot = array[right];
-
-    int index = (left - 1);
-
-    for (int j = left; j < right; j++) 
-    {
-        if (array[j] <= pivot) 
-        {
-            index++;
-            swap(array[index], array[j]);
-        }
-    }
-
-    swap(array[index + 1], array[right]);
-
-    return (index + 1);
-}
-
-void QuickSort(int array[], int low, int high)
-{
-    int i = low;
-    int j = high;
+    int i = left;
+    int j = right;
     int pivot = array[(i + j) / 2];
     while (i <= j)
     {
@@ -93,21 +73,21 @@ void QuickSort(int array[], int low, int high)
             j--;
         }
     }
-    if (j > low)
+    if (j > left)
     {
-        QuickSort(array, low, j);
+        QuickSort(array, left, j);
     }      
-    if (i < high)
+    if (i < right)
     {
-        QuickSort(array, i, high);
+        QuickSort(array, i, right);
     }      
 }
 
-void BubbleSort(int array[], int n)
+void BubbleSort(int array[], int size)
 {
-    for (int i = 0; i < n - 1; i++)
+    for (int i = 0; i < size - 1; i++)
     {
-        for (int j = 0; j < n - i - 1; j++)
+        for (int j = 0; j < size - i - 1; j++)
         {
             if (array[j] > array[j + 1])
             {
@@ -117,9 +97,9 @@ void BubbleSort(int array[], int n)
     }       
 }
 
-bool isSorted(int array[], int n)
+bool isSorted(int array[], int size)
 {
-    for (int i = 0; i < n-1; i++)
+    for (int i = 0; i < size-1; i++)
     {
         if (array[i] > array[i + 1])
         {
@@ -130,29 +110,29 @@ bool isSorted(int array[], int n)
     return true;
 }
 
-void Shuffle(int array[], int n)
+void Shuffle(int array[], int size)
 {
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < size; i++)
     {
-        swap(array[i], array[rand() % n]);
+        swap(array[i], array[rand() % size]);
     }    
 }
 
-void BogoSort(int array[], int n)
+void BogoSort(int array[], int size)
 {
     srand(time(0));
 
-    while (!isSorted(array, n))
+    while (!isSorted(array, size))
     {
-        Shuffle(array, n);
+        Shuffle(array, size);
     }
 }
 
-void CountSort(char array[], int n)
+void CountSort(char array[], int size)
 {
     char max = array[0];
 
-    for (int i = 1; i < n; i++)
+    for (int i = 1; i < size; i++)
     {
         if (array[i] > max)
         {
@@ -167,7 +147,7 @@ void CountSort(char array[], int n)
         count[i] = 0;
     }
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < size; i++)
     {
         count[(int)array[i]]++;
     }

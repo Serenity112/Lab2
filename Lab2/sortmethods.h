@@ -12,7 +12,7 @@ void BubbleSort(int[], int);
 
 bool isSorted(int[], int);
 
-void Shuffle(int[], int n);
+void Shuffle(int[], int);
 
 void BogoSort(int[], int);
 
